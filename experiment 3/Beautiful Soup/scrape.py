@@ -4,7 +4,7 @@
 import requests
 from bs4 import BeautifulSoup
 
-webpageurl = "https://www.flipkart.com/trola-black-shark-running-shoes-men/p/itmf83965073227c?pid=SHOFZP5FFT6RYTYW&lid=LSTSHOFZP5FFT6RYTYWS2GISP&marketplace=FLIPKART&srno=b_1_1&otracker=hp_omu_Deals%2Bof%2Bthe%2BDay_2_4.dealCard.OMU_MMNKD68VVV74_3&otracker1=hp_omu_SECTIONED_neo%2Fmerchandising_Deals%2Bof%2Bthe%2BDay_NA_dealCard_cc_2_NA_view-all_3&fm=neo%2Fmerchandising&iid=en_XO3g%2BpRUWhED9M2F6cGTSLsJBNWZJpMWgvJ4%2FvxQwqCxbRRVNlN5FOUVmFewJX4hpgJzqDbAfQrRBxTZe0OGIw%3D%3D&ppt=browse&ppn=browse&ssid=yycab9wyrk0000001614082214374"
+webpageurl = "https://www.flipkart.com/hp-pavilion-gaming-ryzen-5-quad-core-3550h-8-gb-1-tb-hdd-windows-10-home-4-gb-graphics-nvidia-geforce-gtx-1650-15-ec0101ax-laptop/p/itma1af6bf593dc8?pid=COMFSFNVDXG74QXR&lid=LSTCOMFSFNVDXG74QXRY8FRH2&marketplace=FLIPKART&srno=b_1_22&otracker=hp_rich_navigation_6_1.navigationCard.RICH_NAVIGATION_Electronics~Gaming_PK7I48M403OR&fm=organic&iid=a4a75fb6-a7c4-406f-8829-6f0897fc37fc.COMFSFNVDXG74QXR.SEARCH&ppt=browse&ppn=browse&ssid=tri79mziu80000001614107514263"
 data = requests.get(webpageurl) #gets all content of webpage
 
 # print(data.text[:1000])
@@ -19,10 +19,11 @@ soup = BeautifulSoup(data.text, 'html.parser')
 
 product_name = soup.find('span', {'class': 'B_NuCI'})
 product_price = soup.find('div', {'class': '_30jeq3 _16Jk6d'})
-product_discount = soup.find('div', {'class': '_3Ay6Sb _31Dcoz pZkvcx'})
-product_image = soup.find('div', {'class': '_312yBx SFzpgZ'})
+product_discount = soup.find('div', {'class': '_3Ay6Sb _31Dcoz'})
+product_image = soup.find('div', {'class': 'CXW8mj _3nMexc'})
 
-print(product_name.text)
-print(product_price.text)
-print(product_discount.span.text)
-print(product_image.img)
+print("\n\n***********OUTPUT***********")
+print("Product Name = "+product_name.text)
+print("Product Price = "+product_price.text)
+print("Product Discount = "+product_discount.span.text)
+print("Product Image = "+str(product_image.img))
