@@ -1,0 +1,92 @@
+import math
+
+def listToString(l) :
+  s=""
+  for i in l:
+    s = s+str(i)
+  return s
+
+def encode(t):
+    x=[];
+    if(t==0):
+        return [0];
+    while(t>0):
+        x.append(t%2);
+        t=int(t/2);
+    return x
+
+def unary(t):
+    y=[];
+    for i in range(t-1):
+        y.append(0);
+    y.append(1)
+    return y;    
+
+GolombCode = []
+even_num=[2,4,6,8,10,12,14,16,18,20]
+b=10
+for x in even_num:
+
+ q=int(x/b)
+ y=unary(q+1)
+ r=x-(q*b)
+ i=math.floor(math.log(b,2));
+ d=math.pow(2,i+1)-b;
+ if(r>=d):
+     r+=int(d);
+ r2=encode(r);
+ if(len(r2)<=i and r>=d):
+     r2.append(0);
+ if(len(r2)<i and r<d):
+     r2.append(0);    
+ r2=r2[::-1];
+ y=y+r2;
+ GolombCode.append(listToString(y));
+ print('Code of '+str(x)+': '+listToString(y))
+
+
+
+def decode(x):
+    num=0;
+    for i in range(len(x)):
+        num+=(int(x[len(x)-1-i])*(math.pow(2,i)));
+    return num;
+for i in range(10):
+ x=str(input('Enter code: '))
+ x=list(x)
+
+ i=math.floor(math.log(b,2))
+ d=math.pow(2,i+1)-b
+
+
+ p2=0;
+ l=1;
+ while(p2<len(x)):
+     t=0;
+     flag=0;
+     r=[];
+     k=i;
+     q=0;
+     for p in range(p2,len(x)):
+         if(x[p]=='0' and flag==0):
+             t+=1;
+             continue;
+         if(x[p]=='1' and flag==0):
+             q=t;
+             flag=1;
+             continue;
+         r.append(x[p]);
+         k-=1;
+         if(k==0):
+             rnum=decode(r);
+             if(rnum<d):
+                 p2=p+1;
+                 break;
+         if(k==-1):
+             rnum=decode(r);
+             rnum=rnum-d;
+             p2=p+1;
+             break;
+     ans=q*b+rnum;
+     print(ans);
+     l=0;
